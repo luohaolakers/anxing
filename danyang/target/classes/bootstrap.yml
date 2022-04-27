@@ -1,0 +1,55 @@
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: shutdown,info
+
+spring:
+  application:
+    name: anxing
+  main:
+    allow-bean-definition-overriding: true
+
+---
+spring:
+  profiles: local
+  cloud:
+    nacos:
+      discovery:
+        server-addr: https://mtz002-nacos.pp.dktapp.cloud
+        namespace: bc088155-e7df-4488-a39b-55cbcc5b0656
+        group: DEFAULT_GROUP
+      config:
+        server-addr: https://mtz002-nacos.pp.dktapp.cloud
+        namespace: bc088155-e7df-4488-a39b-55cbcc5b0656
+        group: DEFAULT_GROUP
+        file-extension: yml
+---
+spring:
+  profiles: preprod
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_URL}
+        namespace: ${NACOS_REPLN_NAMESPACE}
+      config:
+        server-addr: ${NACOS_URL}
+        namespace: ${NACOS_REPLN_NAMESPACE}
+        file-extension: yml
+val: preprod
+---
+spring:
+  profiles: production
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_URL}
+        namespace: ${NACOS_REPLN_NAMESPACE}
+      config:
+        server-addr: ${NACOS_URL}
+        namespace: ${NACOS_REPLN_NAMESPACE}
+        file-extension: yml
+val: production

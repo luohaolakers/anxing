@@ -1,0 +1,44 @@
+server:
+  port: 12088
+  servlet:
+    context-path: /anxing
+  connection-timeout: 150000
+
+spring:
+  application:
+    name: anxing
+
+  messages:
+    basename: static/i18n/messages
+
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+ribbon:
+  OkToRetryOnAllOperations: false
+  ReadTimeout: 50000
+  ConnectTimeout: 50000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+
+httpClient:
+  pool:
+    timeToLive: 6000
+    maxTotal: 100
+    maxPerRoute: 50
+    socketTimeout: 5000
+    connectTimeout: 5000
+    connectionRequestTimeout: 5000
+    keepAlive: 30000
